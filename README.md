@@ -39,17 +39,18 @@ These commands extend Claude Code's built-in functionality with project-specific
 ## 📁 File Structure
 
 ```
-commands/                       # Custom command directory
+commands/                      # Custom command directory
 ├── session-start.md           # Command for starting a new session
 ├── session-update.md          # Command for updating current session
 ├── session-end.md             # Command for ending and summarizing
 ├── session-current.md         # Command for viewing current status
+├── session-resume.md          # Command to resume an existing session with name
 ├── session-list.md            # Command for listing all sessions
 └── session-help.md            # Command for showing help
 
 sessions/                      # Session storage directory
-├── .current-session          # Tracks the active session filename
-├── 2025-01-16-1347.md       # Example session file
+├── .current-session           # Tracks the active session filename
+├── 2025-01-16-1347.md         # Example session file
 └── [YYYY-MM-DD-HHMM-name].md  # Session naming format
 ```
 
@@ -150,6 +151,16 @@ Shows the status of the current active session.
 - Shows recent updates
 - Lists current goals and tasks
 - Reminds of available commands
+
+### `/project:session-resume` [name]
+Resume a saved session by its name or file identifier.
+
+**What it does:**
+- Accepts a session name as $ARGUMENT
+- Checks for a matching .md file in .claude/sessions/
+- Prompts user to choose from available sessions if the file isn't found
+- Updates .current-session to point to the selected session
+- Confirms session has been loaded and offers to resume work
 
 ### `/project:session-list`
 Lists all session files with summaries.
